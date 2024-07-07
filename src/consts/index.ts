@@ -1,0 +1,10 @@
+import { APP_ENV, APP_NAME, BING_AI_API_URL, GPT_AI_API_URL, GEMINI_AI_API_URL, BARD_AI_API_URL } from './app.config';
+
+export {
+  APP_ENV,
+  APP_NAME,
+  BING_AI_API_URL,
+  GPT_AI_API_URL,
+  GEMINI_AI_API_URL,
+  BARD_AI_API_URL
+};
