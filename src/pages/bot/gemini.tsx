@@ -131,23 +131,25 @@ export default function GEMINI() {
                   </div>
                 </Show>
               </div>
-              <div class="flex gap-2 w-full mt-[2vh]">
-                <input
-                  required
-                  type="text"
-                  value={text()}
-                  class="input input-primary w-full"
-                  placeholder="Type a message to AI"
-                  onchange={(e: any) => setText(e.target.value)}
-                />
-                <Show when={isResponseError()}>
-                  <button type='submit' class="btn btn-error" onclick={handleNewChat}>New Chat</button>
-                </Show>
+              <form>
+                <div class="flex gap-2 w-full mt-[2vh]">
+                  <input
+                    required
+                    type="text"
+                    value={text()}
+                    class="input input-primary w-full"
+                    placeholder="Type a message to AI"
+                    onchange={(e: any) => setText(e.target.value)}
+                  />
+                  <Show when={isResponseError()}>
+                    <button type='submit' class="btn btn-error" onclick={handleNewChat}>New Chat</button>
+                  </Show>
 
-                <Show when={!isResponseError()}>
-                  <button type='submit' class="btn btn-error" onclick={handleSend} disabled={isLoading()}>Send</button>
-                </Show>
-              </div>
+                  <Show when={!isResponseError()}>
+                    <button type='submit' class="btn btn-error" onclick={handleSend} disabled={isLoading()}>Send</button>
+                  </Show>
+                </div>
+              </form>
             </div>
           </div>
         </div>
