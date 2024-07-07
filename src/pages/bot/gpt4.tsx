@@ -1,6 +1,8 @@
+import { alert } from '@utils';
 import { MainLayout } from '@layouts';
 import { ApiService } from '@services';
 import { IChatStruct } from '@interfaces';
+import { SweetAlertResult } from 'sweetalert2';
 import { EApiType, EChatSender } from '@enums';
 import { createSignal, For, Match, Show, Switch } from 'solid-js';
 import { BeforeLeaveEventArgs, useBeforeLeave } from '@solidjs/router';
@@ -62,10 +64,24 @@ export default function GPT4() {
       // preventDefault to block immediately and prompt user async
       e.preventDefault();
       setTimeout(() => {
-        if (window.confirm("Are you sure you want to leave?\n\nChat will be closed automatically!")) {
-          // user wants to proceed anyway so retry with force=true
-          e.retry(true);
-        }
+        alert.fire({
+          title: 'Konfirmasi',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Tidak',
+          html: `
+            <div class="flex justify-center items-center gap-4 mt-4">
+              <span>
+                Apakah anda yakin ingin meninggalkan halaman ini?
+                <br />
+                Semua data yang sudah di buat akan hilang!!
+              </span>
+            </div>
+          `
+        }).then((result: SweetAlertResult) => {
+          if (result.isConfirmed) e.retry(true);
+        });
       }, 100);
     }
   });
