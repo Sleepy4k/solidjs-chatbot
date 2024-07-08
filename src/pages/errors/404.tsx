@@ -1,3 +1,5 @@
+import { APP_NAME } from '@/consts';
+import { Title } from '@solidjs/meta';
 import { useNavigate } from '@solidjs/router';
 
 export default function NotFound() {
@@ -5,6 +7,7 @@ export default function NotFound() {
 
   return (
     <div class="w-screen h-screen">
+      <Title>{`404 | ${APP_NAME}`}</Title>
       <div class="w-full h-full flex justify-center items-center">
         <div class="flex flex-col justify-center items-center gap-10">
           <div class="flex flex-col items-center gap-2">

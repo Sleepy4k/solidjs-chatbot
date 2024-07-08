@@ -1,10 +1,11 @@
 import { alert } from '@utils';
 import { MainLayout } from '@layouts';
 import { ApiService } from '@services';
+import { createSignal } from 'solid-js';
 import { IChatStruct } from '@interfaces';
 import { SweetAlertResult } from 'sweetalert2';
 import { EApiType, EChatSender } from '@enums';
-import { createSignal, For, Match, Show, Switch } from 'solid-js';
+import { ChatBox, ChatInput, ChatHeader } from '@components';
 import { BeforeLeaveEventArgs, useBeforeLeave } from '@solidjs/router';
 
 export default function GPT4() {
@@ -87,69 +88,28 @@ export default function GPT4() {
   });
 
   return (
-    <MainLayout>
+    <MainLayout title='GPT-4'>
       <div class="w-[85%] h-full px-4 xl:px-4 2xl:px-5 xl:py-2 overflow-clip">
         <div class="flex flex-col gap-4">
           <div class="card shadow-2xl">
             <div class="card-body">
-              <div class="flex justify-between items-center">
-                <h2 class="card-title">GPT4 AI</h2>
-                <button
-                  type='button'
-                  class="btn btn-ghost"
-                  onClick={handleNewChat}
-                  disabled={isLoading()}
-                >
-                  New Chat
-                </button>
-              </div>
-              <div class='divider divider-lg'></div>
-              <div class="overflow-y-auto h-[31rem]">
-                <For each={chat()}>
-                  {(chat) => (
-                    <Switch>
-                      <Match when={chat.sender === EChatSender.BOT}>
-                        <div class="chat chat-start mt-[2vh]">
-                          <div class="chat-bubble">{chat.messages}</div>
-                        </div>
-                      </Match>
-
-                      <Match when={chat.sender === EChatSender.USER}>
-                        <div class="chat chat-end">
-                          <div class="chat-bubble">{chat.messages}</div>
-                        </div>
-                      </Match>
-                    </Switch>
-                  )}
-                </For>
-
-                <Show when={isLoading()}>
-                  <div class="chat chat-start">
-                    <div class="chat-bubble">
-                      <span class="loading loading-dots loading-md"></span>
-                    </div>
-                  </div>
-                </Show>
-              </div>
-              <form>
-                <div class="flex gap-2 w-full mt-[2vh]">
-                  <input
-                    required
-                    type="text"
-                    value={text()}
-                    class="input input-primary w-full"
-                    placeholder="Type a message to AI"
-                    onchange={(e: any) => setText(e.target.value)}
-                  />
-                  <Show when={isResponseError()}>
-                    <button type='submit' class="btn btn-error" onclick={handleNewChat}>New Chat</button>
-                  </Show>
-
-                  <Show when={!isResponseError()}>
-                    <button type='submit' class="btn btn-error" onclick={handleSend} disabled={isLoading()}>Send</button>
-                  </Show>
-                </div>
-              </form>
+              <ChatHeader
+                title="GPT-4"
+                isLoading={isLoading()}
+                onNewChat={handleNewChat}
+              />
+              <ChatBox
+                chat={chat()}
+                isLoading={isLoading()}
+              />
+              <ChatInput
+                value={text()}
+                isLoading={isLoading()}
+                isError={isResponseError()}
+                onSend={handleSend}
+                onNewChat={handleNewChat}
+                onChange={(e: any) => setText(e.target.value)}
+              />
             </div>
           </div>
         </div>

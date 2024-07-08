@@ -12,6 +12,9 @@ const config: Config = {
         'spin-slow': 'spin 7s linear infinite',
       },
       screens: {
+        'tablet': '640px',
+        'laptop': '1024px',
+        'desktop': '1280px',
         '3xl': '2200px',
       },
       colors: {
