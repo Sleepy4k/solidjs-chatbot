@@ -11,7 +11,7 @@ export default function ChatHeader(props: IHeaderProps) {
         <h2 class="card-title">{props.title}</h2>
         <button
           type='button'
-          class="btn btn-ghost"
+          class="btn btn-neutral"
           onClick={props.onNewChat}
           disabled={props.isLoading}
         >
