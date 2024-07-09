@@ -1,18 +1,21 @@
 import { alert } from '@utils';
 import { MainLayout } from '@layouts';
 import { ApiService } from '@services';
-import { createSignal } from 'solid-js';
 import { IChatStruct } from '@interfaces';
 import { SweetAlertResult } from 'sweetalert2';
 import { EApiType, EChatSender } from '@enums';
-import { ChatBox, ChatInput, ChatHeader } from '@components';
+import { createSignal, onMount, Show } from 'solid-js';
 import { BeforeLeaveEventArgs, useBeforeLeave } from '@solidjs/router';
+import { ChatBox, ChatError, ChatInput, ChatHeader, ChatLoading, AudioPlayer } from '@components';
 
 export default function GEMINI() {
   const [text, setText] = createSignal<string>('');
   const [chat, setChat] = createSignal<IChatStruct[]>([]);
   const [isLoading, setLoading] = createSignal<boolean>(false);
+  const [isMounted, setIsMounted] = createSignal<boolean>(false);
+  const [isApiOnline, setApiOnline] = createSignal<boolean>(false);
   const [isChatOpen, setIsChatOpen] = createSignal<boolean>(false);
+  const [musicStart, setMusicStart] = createSignal<boolean>(false);
   const [isResponseError, setResponseError] = createSignal<boolean>(false);
 
   const handleNewChat = () => {
@@ -60,6 +63,22 @@ export default function GEMINI() {
     });
   }
 
+  onMount(async () => {
+    await ApiService.get({
+      url: '',
+      name: 'System',
+      server: EApiType.CHECK_STATUS,
+      success: (res: any) => {
+        const value = res.data;
+        if (value.status) setApiOnline(true);
+      },
+      finally: () => {
+        setMusicStart(true);
+        setIsMounted(true);
+      }
+    });
+  });
+
   useBeforeLeave((e: BeforeLeaveEventArgs) => {
     if (isChatOpen() && !e.defaultPrevented) {
       // preventDefault to block immediately and prompt user async
@@ -89,26 +108,36 @@ export default function GEMINI() {
 
   return (
     <MainLayout title='GEMINI'>
+      <AudioPlayer isPlaying={musicStart()} setIsPlaying={setMusicStart} />
       <div class="w-[85%] h-full px-4 xl:px-4 2xl:px-5 xl:py-2 overflow-clip">
         <div class="flex flex-col gap-4">
           <div class="card shadow-2xl">
             <div class="card-body">
               <ChatHeader
-                title="GEMINI"
+                title="BING"
                 isLoading={isLoading()}
                 onNewChat={handleNewChat}
               />
-              <ChatBox
-                chat={chat()}
-                isLoading={isLoading()}
+              <ChatLoading
+                isMounted={isMounted()}
               />
-              <ChatInput
-                value={text()}
-                isLoading={isLoading()}
-                isError={isResponseError()}
-                onSend={handleSend}
-                onNewChat={handleNewChat}
-                onChange={(e: any) => setText(e.target.value)}
+              <Show when={isMounted() && isApiOnline()}>
+                <ChatBox
+                  chat={chat()}
+                  isLoading={isLoading()}
+                />
+                <ChatInput
+                  value={text()}
+                  isLoading={isLoading()}
+                  isError={isResponseError()}
+                  onSend={handleSend}
+                  onNewChat={handleNewChat}
+                  onChange={(e: any) => setText(e.target.value)}
+                />
+              </Show>
+              <ChatError
+                isMounted={isMounted()}
+                isApiOnline={isApiOnline()}
               />
             </div>
           </div>
