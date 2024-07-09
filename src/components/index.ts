@@ -1,12 +1,16 @@
 import { NavBar, Footer } from "./main";
+import AudioPlayer from "./audio.player";
 import ChangeTheme from "./change.theme";
-import { ChatBox, ChatInput, ChatHeader } from "./chat";
+import { ChatBox, ChatError, ChatInput, ChatHeader, ChatLoading } from "./chat";
 
 export {
   NavBar,
   Footer,
   ChatBox,
+  ChatError,
   ChatInput,
   ChatHeader,
-  ChangeTheme
+  AudioPlayer,
+  ChangeTheme,
+  ChatLoading
 };
