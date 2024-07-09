@@ -59,6 +59,7 @@ export default function GEMINI() {
       },
       finally: () => {
         setLoading(false);
+        setMusicStart(true);
       }
     });
   }
@@ -73,7 +74,6 @@ export default function GEMINI() {
         if (value.status) setApiOnline(true);
       },
       finally: () => {
-        setMusicStart(true);
         setIsMounted(true);
       }
     });

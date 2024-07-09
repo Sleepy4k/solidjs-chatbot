@@ -59,8 +59,8 @@ export default function GPT4() {
         setChat([...chat(), { sender: EChatSender.BOT, messages: 'Something went wrong, please try again later' }]);
       },
       finally: () => {
-        setMusicStart(true);
         setLoading(false);
+        setMusicStart(true);
       }
     });
   }

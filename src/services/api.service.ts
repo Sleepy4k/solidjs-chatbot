@@ -38,8 +38,6 @@ const initService = async (_props: IServiceProp, method: EApiMethod = EApiMethod
       console.log(`[${props.name}] ${result.message}`);
     }
   } catch (err: any) {
-    console.log(err);
-
     if (props.error) props.error(err.response);
 
     if (err.response) {

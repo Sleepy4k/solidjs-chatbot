@@ -59,6 +59,7 @@ export default function BING() {
       },
       finally: () => {
         setLoading(false);
+        setMusicStart(true);
       }
     });
   }
@@ -73,7 +74,6 @@ export default function BING() {
         if (value.status) setApiOnline(true);
       },
       finally: () => {
-        setMusicStart(true);
         setIsMounted(true);
       }
     });
