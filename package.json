@@ -9,7 +9,7 @@
     "build": "vite build",
     "safe-build": "npm run scramble && vite build",
     "serve": "vite preview",
-    "scramble": "node ./scrambling/secure.js"
+    "scramble": "node ./scrambling/secure.js up"
   },
   "author": "Sleepy4k",
   "keywords": [
