@@ -1,0 +1,23 @@
+[
+  {
+    "version": "1.0.0",
+    "date": "2024-07-09",
+    "changes": [
+      "Slicing the project into smaller parts",
+      "Add notification when bot is typing",
+      "Add gradient background for chatbot",
+      "Add check status for bot response",
+      "Make swal alert body into component"
+    ]
+  },
+  {
+    "version": "1.0.0",
+    "date": "2024-07-08",
+    "changes": [
+      "Initial release",
+      "Add Swal Alert 2",
+      "Add listener for text input 'Enter' key",
+      "Add typing effect for bot response"
+    ]
+  }
+]
