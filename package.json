@@ -7,7 +7,9 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "safe-build": "npm run scramble && vite build",
+    "serve": "vite preview",
+    "scramble": "node ./scrambling/secure.js"
   },
   "author": "Sleepy4k",
   "keywords": [
@@ -30,11 +32,13 @@
     "@solidjs/router": "^0.13.6",
     "axios": "^1.7.2",
     "solid-js": "^1.8.18",
+    "solid-styled-components": "^0.28.5",
     "sweetalert2": "^11.12.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
     "daisyui": "^4.12.10",
+    "minimist": "^1.2.8",
     "path": "^0.12.7",
     "postcss": "^8.4.39",
     "solid-devtools": "^0.30.1",
