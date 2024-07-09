@@ -37,6 +37,8 @@ const initService = async (_props: IServiceProp, method: EApiMethod = EApiMethod
 
       console.log(`[${props.name}] ${result.message}`);
     }
+
+    return response ? response.data : null;
   } catch (err: any) {
     if (props.error) props.error(err.response);
 
@@ -58,10 +60,10 @@ const initService = async (_props: IServiceProp, method: EApiMethod = EApiMethod
 
 const ApiService = {
   get: async (props: IServiceProp) => {
-    await initService(props, EApiMethod.GET);
+    return await initService(props, EApiMethod.GET);
   },
   post: async (props: IServiceProp) => {
-    await initService(props, EApiMethod.POST);
+    return await initService(props, EApiMethod.POST);
   },
   put: async (props: IServiceProp) => {
     await initService(props, EApiMethod.PUT);
