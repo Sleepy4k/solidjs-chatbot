@@ -35,6 +35,9 @@ export default function NavBar() {
             <li>
               <A href='/gemini'>GEMINI</A>
             </li>
+            <li>
+              <A href='/changelogs'>ChangeLogs</A>
+            </li>
           </ul>
         </div>
         <div class="navbar-end">
@@ -76,6 +79,9 @@ export default function NavBar() {
               </li>
               <li>
                 <A href='/gemini'>GEMINI</A>
+              </li>
+              <li>
+                <A href='/changelogs'>ChangeLogs</A>
               </li>
             </ul>
           </div>
