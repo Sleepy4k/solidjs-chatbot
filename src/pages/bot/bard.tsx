@@ -115,7 +115,7 @@ export default function BARD() {
             <div class="card-body">
               <ChatHeader
                 title="BING"
-                isLoading={isLoading()}
+                isLoading={isLoading() || !isMounted() || !isChatOpen() || !isApiOnline()}
                 onNewChat={handleNewChat}
               />
               <ChatLoading
