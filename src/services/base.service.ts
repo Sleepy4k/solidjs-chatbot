@@ -23,6 +23,10 @@ const backendApi = (server: EApiType = EApiType.GPT) => {
     serviceUrl = EApiType.GEMINI.valueOf();
     break;
 
+  case EApiType.CHECK_STATUS:
+    serviceUrl = EApiType.CHECK_STATUS.valueOf();
+    break;
+
   default:
     serviceUrl = EApiType.GPT.valueOf();
     break;
