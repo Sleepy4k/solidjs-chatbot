@@ -6,7 +6,7 @@ import { SweetAlertResult } from 'sweetalert2';
 import { EApiType, EChatSender } from '@enums';
 import { createSignal, onMount, Show } from 'solid-js';
 import { BeforeLeaveEventArgs, useBeforeLeave } from '@solidjs/router';
-import { ChatBox, ChatError, ChatInput, ChatHeader, ChatLoading, AudioPlayer } from '@components';
+import { ChatBox, ChatError, ChatInput, ChatHeader, ChatLoading, AudioPlayer, SwalConfirm } from '@components';
 
 export default function GPT4() {
   const [text, setText] = createSignal<string>('');
@@ -91,15 +91,7 @@ export default function GPT4() {
           showCancelButton: true,
           confirmButtonText: 'Ya',
           cancelButtonText: 'Tidak',
-          html: `
-            <div class="flex justify-center items-center gap-4 mt-4">
-              <span>
-                Apakah anda yakin ingin meninggalkan halaman ini?
-                <br />
-                Semua data yang sudah di buat akan hilang!!
-              </span>
-            </div>
-          `
+          html: SwalConfirm() as HTMLElement
         }).then((result: SweetAlertResult) => {
           if (result.isConfirmed) e.retry(true);
         });
@@ -115,7 +107,7 @@ export default function GPT4() {
           <div class="card shadow-2xl">
             <div class="card-body">
               <ChatHeader
-                title="BING"
+                title="GPT-4"
                 isLoading={isLoading() || !isMounted() || !isChatOpen() || !isApiOnline()}
                 onNewChat={handleNewChat}
               />

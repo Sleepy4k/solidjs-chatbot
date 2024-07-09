@@ -6,7 +6,7 @@ import { SweetAlertResult } from 'sweetalert2';
 import { EApiType, EChatSender } from '@enums';
 import { createSignal, onMount, Show } from 'solid-js';
 import { BeforeLeaveEventArgs, useBeforeLeave } from '@solidjs/router';
-import { ChatBox, ChatError, ChatInput, ChatHeader, ChatLoading, AudioPlayer } from '@components';
+import { ChatBox, ChatError, ChatInput, ChatHeader, ChatLoading, AudioPlayer, SwalConfirm } from '@components';
 
 export default function GEMINI() {
   const [text, setText] = createSignal<string>('');
@@ -90,15 +90,7 @@ export default function GEMINI() {
           showCancelButton: true,
           confirmButtonText: 'Ya',
           cancelButtonText: 'Tidak',
-          html: `
-            <div class="flex justify-center items-center gap-4 mt-4">
-              <span>
-                Apakah anda yakin ingin meninggalkan halaman ini?
-                <br />
-                Semua data yang sudah di buat akan hilang!!
-              </span>
-            </div>
-          `
+          html: SwalConfirm() as HTMLElement
         }).then((result: SweetAlertResult) => {
           if (result.isConfirmed) e.retry(true);
         });
@@ -114,7 +106,7 @@ export default function GEMINI() {
           <div class="card shadow-2xl">
             <div class="card-body">
               <ChatHeader
-                title="BING"
+                title="GEMINI"
                 isLoading={isLoading() || !isMounted() || !isChatOpen() || !isApiOnline()}
                 onNewChat={handleNewChat}
               />
