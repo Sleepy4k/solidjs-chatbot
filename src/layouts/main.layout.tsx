@@ -1,19 +1,48 @@
-import { Meta } from '@contexts';
-import { createEffect } from 'solid-js';
-import { IMainLayoutProp } from '@interfaces';
+import { EThemeType } from '@enums';
+import { Meta, Theme } from '@contexts';
 import { NavBar, Footer } from '@components';
+import { IMainLayoutProp } from '@interfaces';
+import { styled } from 'solid-styled-components';
+import BACKGROUND from '@assets/images/background.webp';
+import { createEffect, JSXElement, Show } from 'solid-js';
 
 export default function MainLayout(props: IMainLayoutProp) {
+  const { theme } = Theme.useTheme();
   const { changeTitle } = Meta.useMeta();
+
+  // Buat styled div component untuk nambahin css background image
+  // Karena SolidJS tidak support inline style (ada warning nya)
+  const StyledDiv = styled('div')`
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-image: url(${BACKGROUND});
+  `;
 
   createEffect(() => {
     if (props.title) changeTitle(props.title);
     else changeTitle();
   });
 
+  const Layout = (props: { children: JSXElement, class: string }) => (
+    <div class='w-full'>
+      <Show when={theme() === EThemeType.LIGHT}>
+        <div class={props.class}>
+          {props.children}
+        </div>
+      </Show>
+      <Show when={theme() === EThemeType.DARK}>
+        <StyledDiv class={props.class}>
+          {props.children}
+        </StyledDiv>
+      </Show>
+    </div>
+  );
+
   return (
-    <div
-      class="w-full p-0 m-0 overflow-visible min-h-screen flex flex-col justify-between"
+    <Layout
+      class="p-0 m-0 overflow-visible min-h-screen flex flex-col justify-between"
     >
       <NavBar />
       <div class='lg:mt-[8vh] mt-[5rem]'>
@@ -22,6 +51,6 @@ export default function MainLayout(props: IMainLayoutProp) {
         </div>
       </div>
       <Footer />
-    </div>
+    </Layout>
   );
 }
