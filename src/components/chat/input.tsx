@@ -23,11 +23,24 @@ export default function ChatInput(props: IInputProps) {
           disabled={props.isLoading || props.isError}
         />
         <Show when={props.isError}>
-          <button type='submit' class="btn btn-error" onclick={props.onNewChat}>New Chat</button>
+          <button
+            type='submit'
+            class="btn btn-error"
+            onclick={props.onNewChat}
+          >
+            New Chat
+          </button>
         </Show>
 
         <Show when={!props.isError}>
-          <button type='submit' class={`btn btn-${props.isLoading ? 'neutral' : 'primary'}`} onclick={props.onSend} disabled={props.isLoading}>Send</button>
+          <button
+            type='submit'
+            class={`btn btn-${props.isLoading ? 'neutral' : 'primary'}`}
+            onclick={props.onSend}
+            disabled={props.isLoading}
+          >
+            Send
+          </button>
         </Show>
       </div>
     </form>
