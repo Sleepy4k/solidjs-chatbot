@@ -16,6 +16,7 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
       "@pages/*": ["./src/pages/*"],
       "@consts": ["./src/consts/index.ts"],
       "@enums": ["./src/enums/index.ts"],
