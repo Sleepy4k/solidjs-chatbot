@@ -7,6 +7,8 @@ const GEMINI_AI_API_URL = import.meta.env.VITE_GEMINI_AI_API_URL || 'http://loca
 const BARD_AI_API_URL = import.meta.env.VITE_BARD_AI_API_URL || 'http://localhost:3003';
 const CHECK_STATUS_API_URL = import.meta.env.VITE_CHECK_STATUS_API_URL || 'http://localhost';
 
+const CHANGELOG_URL = import.meta.env.VITE_CHANGELOG_URL || 'http://github.com/username/solidjs-chatbot/main';
+
 export {
   APP_NAME,
   APP_ENV,
@@ -14,5 +16,6 @@ export {
   GPT_AI_API_URL,
   GEMINI_AI_API_URL,
   BARD_AI_API_URL,
-  CHECK_STATUS_API_URL
+  CHECK_STATUS_API_URL,
+  CHANGELOG_URL
 };
