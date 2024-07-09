@@ -23,6 +23,10 @@ export const routes: RouteDefinition[] = [
     component: lazy(() => import("./pages/bot/gemini")),
   },
   {
+    path: "/changelogs",
+    component: lazy(() => import("./pages/changelogs")),
+  },
+  {
     path: "/*all",
     component: lazy(() => import("./pages/errors/404")),
   },
